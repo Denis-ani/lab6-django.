@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Публікації у категорії{% endblock %}
+
+{% block content %}
+<h2>Категорія: {{ category.name }}</h2>
+
+{% if posts %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content|truncatewords:25 }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" width="250">
+                {% endif %}
+                <p><small>Дата: {{ post.created_at|date:"d.m.Y" }}</small></p>
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>У цій категорії поки немає публікацій.</p>
+{% endif %}
+{% endblock %}
